@@ -39,6 +39,8 @@ func shoot():
 
 func _ready():
 	$Timer.connect("timeout", self, "_onTimer_timeout")
+	yield(get_tree(), "idle_frame")
+	get_tree().call_group("zombies","set_player",self)
 
 func _onTimer_timeout():
 	rotate(30)

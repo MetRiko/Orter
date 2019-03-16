@@ -1,10 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Stages/Level.gd" type="Script" id=1]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Tiles/Tile.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Zombie/Zombie.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Tiles/Tile.tscn" type="PackedScene" id=4]
 
-[node name="Level" type="Node2D"]
+[node name="Level" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 
@@ -14,45 +15,49 @@ position = Vector2( 255.241, 189.987 )
 
 [node name="Projectiles" type="Node2D" parent="." index="1"]
 
-[node name="Tiles" type="Node2D" parent="." index="2"]
+[node name="Zombie" parent="." index="2" instance=ExtResource( 3 )]
 
-[node name="Tile" parent="Tiles" index="0" instance=ExtResource( 3 )]
+position = Vector2( 121.372, 6.18695 )
+
+[node name="Tiles" type="Node2D" parent="." index="3"]
+
+[node name="Tile" parent="Tiles" index="0" instance=ExtResource( 4 )]
 
 position = Vector2( 106, 148 )
 
-[node name="Tile2" parent="Tiles" index="1" instance=ExtResource( 3 )]
+[node name="Tile2" parent="Tiles" index="1" instance=ExtResource( 4 )]
 
 position = Vector2( 110, 260 )
 
-[node name="Tile3" parent="Tiles" index="2" instance=ExtResource( 3 )]
+[node name="Tile3" parent="Tiles" index="2" instance=ExtResource( 4 )]
 
 position = Vector2( 228, 345 )
 
-[node name="Tile4" parent="Tiles" index="3" instance=ExtResource( 3 )]
+[node name="Tile4" parent="Tiles" index="3" instance=ExtResource( 4 )]
 
 position = Vector2( 477, 387 )
 
-[node name="Tile5" parent="Tiles" index="4" instance=ExtResource( 3 )]
+[node name="Tile5" parent="Tiles" index="4" instance=ExtResource( 4 )]
 
 position = Vector2( 578, 301 )
 
-[node name="Tile6" parent="Tiles" index="5" instance=ExtResource( 3 )]
+[node name="Tile6" parent="Tiles" index="5" instance=ExtResource( 4 )]
 
 position = Vector2( 310, 338 )
 
-[node name="Tile7" parent="Tiles" index="6" instance=ExtResource( 3 )]
+[node name="Tile7" parent="Tiles" index="6" instance=ExtResource( 4 )]
 
 position = Vector2( 407, 252 )
 
-[node name="Tile8" parent="Tiles" index="7" instance=ExtResource( 3 )]
+[node name="Tile8" parent="Tiles" index="7" instance=ExtResource( 4 )]
 
 position = Vector2( 538, 173 )
 
-[node name="Tile9" parent="Tiles" index="8" instance=ExtResource( 3 )]
+[node name="Tile9" parent="Tiles" index="8" instance=ExtResource( 4 )]
 
 position = Vector2( 434, 99 )
 
-[node name="Tile10" parent="Tiles" index="9" instance=ExtResource( 3 )]
+[node name="Tile10" parent="Tiles" index="9" instance=ExtResource( 4 )]
 
 position = Vector2( 311, 50 )
 
