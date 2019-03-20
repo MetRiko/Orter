@@ -4,6 +4,5 @@
 
 [node name="Root" type="Node"]
 
-[node name="Level" parent="." index="0" instance=ExtResource( 1 )]
-
+[node name="Level" parent="." instance=ExtResource( 1 )]
 
