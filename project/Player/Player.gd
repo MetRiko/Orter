@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-signal ourSignal
+signal hit
 
 var sBullet = preload("res://weapon/Bullet.tscn")
 
@@ -42,5 +42,9 @@ func _ready():
 
 func _onTimer_timeout():
 	rotate(30)
-	
-	
+
+func _physics_process(delta):
+	var collision = move_and_collide(vel.normalized())
+	if collision:
+		hide()
+		$CollisionShape2D.disabled = true;
