@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/dino2.png-9d39eeacff6cf0a4c46c93bf57a86e7e.stex"
+path="res://.import/54348293_421528835278361_7562506723202695168_n.png-0119b7554cc427f9460b7002d54d55e8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://dino2.png"
-dest_files=[ "res://.import/dino2.png-9d39eeacff6cf0a4c46c93bf57a86e7e.stex" ]
+source_file="res://Pacman/54348293_421528835278361_7562506723202695168_n.png"
+dest_files=[ "res://.import/54348293_421528835278361_7562506723202695168_n.png-0119b7554cc427f9460b7002d54d55e8.stex" ]
 
 [params]
 
