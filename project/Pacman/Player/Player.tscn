@@ -4,7 +4,7 @@
 [ext_resource path="res://Pacman/54348293_421528835278361_7562506723202695168_n.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 19.8721, 25.7759 )
+extents = Vector2( 1.08865, 2.34399 )
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -13,6 +13,7 @@ script = ExtResource( 1 )
 current = true
 
 [node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 2 )
 vframes = 2
 hframes = 6
