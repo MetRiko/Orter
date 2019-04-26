@@ -59,7 +59,7 @@ func changeState(newState):
 			return
 		targetPointWorld = astarPath[0]
 	if newState == States.NORMAL:
-		astarPath = map.getPathToRandomTile(global_position)
+		astarPath = map.getPathToRandomTile(global_position, map.Modes.BOTTOM_HALF)
 		if not astarPath or len (astarPath) == 1:
 			print('cant find')
 			return

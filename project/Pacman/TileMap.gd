@@ -7,6 +7,7 @@ onready var parent = self.get_parent()
 var superPointsLocations : Array = [Vector2(1,2), Vector2(1,20), Vector2(19,2), Vector2(19,20)]
 var pointlessRects = [Rect2(Vector2(62,48), Vector2(7,6)), Rect2(Vector2(55,48), Vector2(4,2)), Rect2(Vector2(72,48), Vector2(4,2)), Rect2(Vector2(72,53), Vector2(4,2)), Rect2(Vector2(55,53), Vector2(4,2)) ]
 var pointlessArray = getPointlessArray()
+enum Modes{NONE, BOTTOM_HALF, UPPER_HALF}
 
 onready var astar = AStar.new()
 onready var mapSize = get_used_rect().size
@@ -32,7 +33,9 @@ func _ready():
 	initTiles()
 	var walkableCellsList = astarAddWalkableCells(obstacles)
 	astarConnectWalkableCells(walkableCellsList)
-	getPathToRandomTile(Vector2(512,468))
+	for point in astar.get_points():
+		print('id: ', point, '| pos: ', astar.get_point_position(point))
+#	getPathToRandomTile(Vector2(512,468))
 
 func astarAddWalkableCells(obstacles = []):
 	var pointsArray = []
@@ -79,10 +82,15 @@ func getPath(worldStart, worldEnd):
 		pathWorld.append(pointWorld)
 	return pathWorld
 	
-func getPathToRandomTile(start):
+func getPathToRandomTile(start, mode):
 	randomize()
 	self.pathStartPosition = world_to_map(start)
+	var threshold = mapOffset.y + mapSize.y / 2
 	var tmp = astar.get_point_position(astar.get_points()[randi() % astar.get_points().size()])
+	while mode == 1 and tmp.y < threshold:
+		tmp = astar.get_point_position(astar.get_points()[randi() % astar.get_points().size()])
+	while mode == 2 and tmp.y >= threshold:
+		tmp = astar.get_point_position(astar.get_points()[randi() % astar.get_points().size()])		
 	self.pathEndPosition = Vector2(tmp.x, tmp.y)
 #	var randx = randi() % int(mapSize.x)
 #	var randy = randi() % int(mapSize.y)
