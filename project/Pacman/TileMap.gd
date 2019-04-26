@@ -32,6 +32,7 @@ func _ready():
 	initTiles()
 	var walkableCellsList = astarAddWalkableCells(obstacles)
 	astarConnectWalkableCells(walkableCellsList)
+	getPathToRandomTile(Vector2(512,468))
 
 func astarAddWalkableCells(obstacles = []):
 	var pointsArray = []
@@ -61,7 +62,6 @@ func astarConnectWalkableCells(pointsArray):
 			if not astar.has_point(pointRelativeIndex):
 				continue
 			astar.connect_points(pointIndex, pointRelativeIndex, true)
-#Invalid type in function 'connect_points' in base 'AStar'. Cannot convert argument 2 from Vector2 to int.
 func isOutsideMapBounds(point):
 	return point.x < mapOffset.x or point.y < mapOffset.y or point.x >= mapSize.x + mapOffset.x or point.y >= mapSize.y + mapOffset.y
 	
@@ -79,13 +79,32 @@ func getPath(worldStart, worldEnd):
 		pathWorld.append(pointWorld)
 	return pathWorld
 	
+func getPathToRandomTile(start):
+	randomize()
+	self.pathStartPosition = world_to_map(start)
+	var tmp = astar.get_point_position(astar.get_points()[randi() % astar.get_points().size()])
+	self.pathEndPosition = Vector2(tmp.x, tmp.y)
+#	var randx = randi() % int(mapSize.x)
+#	var randy = randi() % int(mapSize.y)
+#	self.pathEndPosition = Vector2(mapOffset.x + randx, mapOffset.y + randy)
+	print('Finding new path from ', pathStartPosition, ' to ', pathEndPosition, '.')	
+	recalculatePath()
+	var pathWorld = []
+	for point in pointPath:
+		var pointWorld = map_to_world(Vector2(point.x,point.y)) + halfCellSize
+		pathWorld.append(pointWorld)
+	return pathWorld
+	
 func recalculatePath():
 	var startPointIndex = calculatePointIndex(pathStartPosition)
 	var endPointIndex = calculatePointIndex(pathEndPosition)
-	astar.set_point_weight_scale(pointToDisconnect, 9999.0)
-	var tmp = astar.get_point_connections(pointToDisconnect)
-	pointPath = astar.get_point_path(startPointIndex, endPointIndex)
-	astar.set_point_weight_scale(pointToDisconnect, 1.0)
+	if pointToDisconnect != null:
+		astar.set_point_weight_scale(pointToDisconnect, 9999.0)
+		var tmp = astar.get_point_connections(pointToDisconnect)
+		pointPath = astar.get_point_path(startPointIndex, endPointIndex)
+		astar.set_point_weight_scale(pointToDisconnect, 1.0)
+	else:
+		pointPath = astar.get_point_path(startPointIndex, endPointIndex)		
 
 func setPathStartPosition(value):
 	if value in obstacles:

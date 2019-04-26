@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Stages/LevelPacman.gd" type="Script" id=1]
 [ext_resource path="res://Pacman/tileset_map_pacman_2.tres" type="TileSet" id=2]
 [ext_resource path="res://Pacman/TileMap.gd" type="Script" id=3]
 [ext_resource path="res://Pacman/Player/Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Pacman/Pacman/Pacman.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Pacman/Ghost/Ghost.tscn" type="PackedScene" id=6]
 
 [node name="LevelPacman" type="Node2D"]
 script = ExtResource( 1 )
@@ -21,13 +22,25 @@ script = ExtResource( 3 )
 [node name="Player" parent="." groups=[
 "player",
 ] instance=ExtResource( 4 )]
-position = Vector2( 531.629, 404.903 )
+position = Vector2( 524.604, 346.004 )
 movementSpeed = 50.0
 
 [node name="Pacman" parent="." instance=ExtResource( 5 )]
 position = Vector2( 524.057, 466.895 )
 
 [node name="Ghosts" type="Node2D" parent="."]
+
+[node name="Ghost" parent="Ghosts" instance=ExtResource( 6 )]
+position = Vector2( 514.709, 402.798 )
+
+[node name="Ghost2" parent="Ghosts" instance=ExtResource( 6 )]
+position = Vector2( 523.355, 402.798 )
+
+[node name="Ghost3" parent="Ghosts" instance=ExtResource( 6 )]
+position = Vector2( 531.46, 402.798 )
+
+[node name="Ghost4" parent="Ghosts" instance=ExtResource( 6 )]
+position = Vector2( 523.895, 388.209 )
 
 [node name="Line2D" type="Line2D" parent="."]
 width = 2.0
