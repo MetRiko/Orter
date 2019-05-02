@@ -11,7 +11,6 @@ func _ready():
 		if portals[i].name == self.name:
 			portals.remove(i)
 			break
-	print(portals.size())
 
 func _onPortal_enter(object):
 	if timer.is_stopped() and object.ableToTeleport:

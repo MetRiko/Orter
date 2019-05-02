@@ -4,20 +4,19 @@ export var movementSpeed = 20
 onready var timer = $Timer
 enum States {NORMAL, CHASING_PACMAN, CHASING_PLAYER, RUNNING_AWAY}
 var lastDirection = Vector2(-1,0)
-var map : TileMap
+onready var map = self.get_tree().get_root().get_node("/root/Root/LevelPacman/TileMap")
 var currentState = States.NORMAL
 var ableToTeleport = true
 var astarPath = []
 var targetPosition = Vector2()
 var targetPointWorld = Vector2()
 var velocity = Vector2()
-onready var pacman = get_parent().get_parent().get_node("Pacman")
+onready var pacman = self.get_tree().get_root().get_node("/root/Root/LevelPacman/Pacman")
 
 func _init():
 	pass
 	
 func _ready():
-	map = get_parent().get_parent().get_node("TileMap")
 	changeState(States.NORMAL)
 	timer.connect("timeout", self, "_onTimer_timeout")
 
@@ -52,11 +51,10 @@ func changeState(newState):
 		targetPointWorld = astarPath[0]
 
 func moveTo(worldPosition):
-	var MASS = 1.0
 	var ARRIVE_DISTANCE = 0.2
 	var desiredVelocity = (worldPosition - global_position).normalized() * movementSpeed
 	var steering = desiredVelocity - velocity
-	velocity += steering / MASS
+	velocity += steering
 	lastDirection =  velocity.normalized()
 	global_position += velocity * get_process_delta_time()
 	return global_position.distance_to(worldPosition) < ARRIVE_DISTANCE

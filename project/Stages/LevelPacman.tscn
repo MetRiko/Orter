@@ -45,7 +45,13 @@ position = Vector2( 531.46, 402.798 )
 position = Vector2( 523.895, 388.209 )
 
 [node name="Line2D" type="Line2D" parent="."]
+visible = false
 width = 2.0
 
 [node name="Portals" type="Node2D" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2( 520, 415 )
+current = true
+zoom = Vector2( 0.4, 0.4 )
 
