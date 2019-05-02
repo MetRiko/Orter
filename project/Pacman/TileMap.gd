@@ -1,14 +1,18 @@
 extends TileMap
 
-signal teleport
+#######################
+#tiles ids
+#0 wall
+#1 pathway with normal point
+#3 portal
+#4 pathway with uber point
+#5 pathway without points
+#######################
 
 onready var normalPoint = preload("res://Pacman/Scenes/Point.tscn")
 onready var portalScene = preload("res://Pacman/Portal.tscn")
 onready var parent = self.get_parent()
-#onready var superPoint = preload()
-var superPointsLocations : Array = [Vector2(1,2), Vector2(1,20), Vector2(19,2), Vector2(19,20)]
-var pointlessRects = [Rect2(Vector2(62,48), Vector2(7,6)), Rect2(Vector2(55,48), Vector2(4,2)), Rect2(Vector2(72,48), Vector2(4,2)), Rect2(Vector2(72,53), Vector2(4,2)), Rect2(Vector2(55,53), Vector2(4,2)) ]
-var pointlessArray = getPointlessArray()
+onready var superPoint = preload("res://Pacman/Point/SuperPoint.tscn")
 enum Modes{NONE, BOTTOM_HALF, UPPER_HALF}
 
 onready var astar = AStar.new()
@@ -95,7 +99,7 @@ func getPathToRandomTile(start, mode):
 	while mode == 1 and tmp.y < threshold:
 		tmp = astar.get_point_position(astar.get_points()[randi() % astar.get_points().size()])
 	while mode == 2 and tmp.y >= threshold:
-		tmp = astar.get_point_position(astar.get_points()[randi() % astar.get_points().size()])		
+		tmp = astar.get_point_position(astar.get_points()[randi() % astar.get_points().size()])
 	self.pathEndPosition = Vector2(tmp.x, tmp.y)
 	recalculatePath()
 	var pathWorld = []
@@ -109,7 +113,7 @@ func recalculatePath():
 	var endPointIndex = calculatePointIndex(pathEndPosition)
 	if pointToDisconnect != null:
 		astar.set_point_weight_scale(pointToDisconnect, 9999.0)
-		var tmp = astar.get_point_connections(pointToDisconnect)
+#		var tmp = astar.get_point_connections(pointToDisconnect)
 		pointPath = astar.get_point_path(startPointIndex, endPointIndex)
 		astar.set_point_weight_scale(pointToDisconnect, 1.0)
 	else:
@@ -134,17 +138,9 @@ func setPathEndPosition(value):
 	pathEndPosition = value
 	if pathStartPosition != value:
 		recalculatePath()
-
-func getPointlessArray():
-	var array = []
-	for rect in pointlessRects:
-		for i in range (rect.position.x, rect.position.x+rect.size.x):
-			for j in range (rect.position.y, rect.position.y+rect.size.y):
-				array.append(Vector2(i,j))
-	return array
 	
 func initTiles():
-	print('TileMap -> ', 'Initializing navigational tiles')
+	print('TileMap -> ', 'Initializing tiles')
 	var tile = self.get_used_rect()
 	for i in range (tile.size.x):
 		for j in range (tile.size.y):
@@ -155,9 +151,12 @@ func initTiles():
 				var portal = portalScene.instance()
 				portal.global_position = worldPos + self.cell_size / 2
 				parent.addPortal(portal)
+			if self.get_cell(x,y) == 4:
+				var sp = superPoint.instance()
+				sp.global_position = worldPos + self.cell_size/2
+				parent.addPoint(sp)
 			if self.get_cell(x,y) == -1:
-#				tilemap.set_cell(x,y,2)
-				if not pointlessArray.has(Vector2(x,y)):
-					var np = normalPoint.instance()
-					np.global_position = worldPos + self.cell_size/2
-					parent.addPoint(np)
+				var np = normalPoint.instance()
+				np.global_position = worldPos + self.cell_size/2
+				parent.addPoint(np)
+			
