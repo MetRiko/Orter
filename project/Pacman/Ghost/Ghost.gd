@@ -1,11 +1,12 @@
 extends KinematicBody2D
 
 export var movementSpeed = 20
+onready var timer = $Timer
 enum States {NORMAL, CHASING_PACMAN, CHASING_PLAYER, RUNNING_AWAY}
 var lastDirection = Vector2(-1,0)
 var map : TileMap
 var currentState = States.NORMAL
-
+var ableToTeleport = true
 var astarPath = []
 var targetPosition = Vector2()
 var targetPointWorld = Vector2()
@@ -18,6 +19,7 @@ func _init():
 func _ready():
 	map = get_parent().get_parent().get_node("TileMap")
 	changeState(States.NORMAL)
+	timer.connect("timeout", self, "_onTimer_timeout")
 
 func _process(delta):
 	if Input.is_key_pressed(KEY_J):
@@ -32,21 +34,20 @@ func _process(delta):
 			changeState(States.CHASING_PACMAN)
 			return
 		targetPointWorld = astarPath[0]
+	if not ableToTeleport and timer.is_stopped():
+		timer.start()
 	
 func changeState(newState):
 	currentState = newState
 	if newState == States.CHASING_PACMAN:
 		astarPath = map.getPath(global_position, targetPosition)
 		if not astarPath or len (astarPath) == 1:
-#			changeState(States.NORMAL)
-			print('cant find')
 			targetPosition = pacman.global_position
 			return
 		targetPointWorld = astarPath[0]
 	if newState == States.NORMAL:
 		astarPath = map.getPathToRandomTile(global_position, map.Modes.UPPER_HALF)
 		if not astarPath or len (astarPath) == 1:
-			print('cant find')
 			return
 		targetPointWorld = astarPath[0]
 
@@ -54,9 +55,11 @@ func moveTo(worldPosition):
 	var MASS = 1.0
 	var ARRIVE_DISTANCE = 0.2
 	var desiredVelocity = (worldPosition - global_position).normalized() * movementSpeed
-#	print(lastDirection.normalized())
 	var steering = desiredVelocity - velocity
 	velocity += steering / MASS
 	lastDirection =  velocity.normalized()
 	global_position += velocity * get_process_delta_time()
 	return global_position.distance_to(worldPosition) < ARRIVE_DISTANCE
+
+func _onTimer_timeout():
+	ableToTeleport = true

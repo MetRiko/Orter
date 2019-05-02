@@ -25,3 +25,7 @@ shape = SubResource( 1 )
 
 [node name="rc" type="RayCast2D" parent="."]
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+

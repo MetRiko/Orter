@@ -1,7 +1,9 @@
 extends TileMap
 
-onready var tilemap = self
+signal teleport
+
 onready var normalPoint = preload("res://Pacman/Scenes/Point.tscn")
+onready var portalScene = preload("res://Pacman/Portal.tscn")
 onready var parent = self.get_parent()
 #onready var superPoint = preload()
 var superPointsLocations : Array = [Vector2(1,2), Vector2(1,20), Vector2(19,2), Vector2(19,20)]
@@ -20,8 +22,9 @@ var pathEndPosition = Vector2() setget setPathEndPosition
 
 var pointPath = []
 
-onready var obstacles = get_used_cells() ## by id if obstacles changed in runtime
+onready var obstacles = get_used_cells_by_id(0) ## by id if obstacles changed in runtime
 onready var halfCellSize = self.cell_size /2
+onready var portals = get_used_cells_by_id(3)
 
 func _enter_tree():
 	pass
@@ -33,9 +36,6 @@ func _ready():
 	initTiles()
 	var walkableCellsList = astarAddWalkableCells(obstacles)
 	astarConnectWalkableCells(walkableCellsList)
-	for point in astar.get_points():
-		print('id: ', point, '| pos: ', astar.get_point_position(point))
-#	getPathToRandomTile(Vector2(512,468))
 
 func astarAddWalkableCells(obstacles = []):
 	var pointsArray = []
@@ -47,7 +47,6 @@ func astarAddWalkableCells(obstacles = []):
 			pointsArray.append(point)
 			var pointIndex = calculatePointIndex(point)
 			astar.add_point(pointIndex, Vector3(point.x, point.y, 0.0))
-#	print('pointsArray', pointsArray)
 	return pointsArray
 	
 func astarConnectWalkableCells(pointsArray):
@@ -65,6 +64,13 @@ func astarConnectWalkableCells(pointsArray):
 			if not astar.has_point(pointRelativeIndex):
 				continue
 			astar.connect_points(pointIndex, pointRelativeIndex, true)
+	astarConnectPortals(portals)
+			
+func astarConnectPortals(portals = []):
+	var a = calculatePointIndex(portals[0])
+	var b = calculatePointIndex(portals[1])
+	astar.connect_points(a, b, false)
+
 func isOutsideMapBounds(point):
 	return point.x < mapOffset.x or point.y < mapOffset.y or point.x >= mapSize.x + mapOffset.x or point.y >= mapSize.y + mapOffset.y
 	
@@ -75,7 +81,6 @@ func getPath(worldStart, worldEnd):
 	self.pathStartPosition = world_to_map(worldStart)
 	self.pathEndPosition = world_to_map(worldEnd)
 	recalculatePath()
-	print('Finding new path from ', pathStartPosition, ' to ', pathEndPosition, '.')
 	var pathWorld = []
 	for point in pointPath:
 		var pointWorld = map_to_world(Vector2(point.x, point.y)) + halfCellSize
@@ -92,10 +97,6 @@ func getPathToRandomTile(start, mode):
 	while mode == 2 and tmp.y >= threshold:
 		tmp = astar.get_point_position(astar.get_points()[randi() % astar.get_points().size()])		
 	self.pathEndPosition = Vector2(tmp.x, tmp.y)
-#	var randx = randi() % int(mapSize.x)
-#	var randy = randi() % int(mapSize.y)
-#	self.pathEndPosition = Vector2(mapOffset.x + randx, mapOffset.y + randy)
-	print('Finding new path from ', pathStartPosition, ' to ', pathEndPosition, '.')	
 	recalculatePath()
 	var pathWorld = []
 	for point in pointPath:
@@ -143,20 +144,20 @@ func getPointlessArray():
 	return array
 	
 func initTiles():
-	print('Initializing navigational tiles')
-	var tile = tilemap.get_used_rect()
+	print('TileMap -> ', 'Initializing navigational tiles')
+	var tile = self.get_used_rect()
 	for i in range (tile.size.x):
 		for j in range (tile.size.y):
 			var x = tile.position.x+i
 			var y = tile.position.y+j
-			if tilemap.get_cell(x,y) == -1:
-				tilemap.set_cell(x,y,2)
-				var worldPos = tilemap.map_to_world(Vector2(x,y))
+			var worldPos = self.map_to_world(Vector2(x,y))
+			if self.get_cell(x,y) == 3:
+				var portal = portalScene.instance()
+				portal.global_position = worldPos + self.cell_size / 2
+				parent.addPortal(portal)
+			if self.get_cell(x,y) == -1:
+#				tilemap.set_cell(x,y,2)
 				if not pointlessArray.has(Vector2(x,y)):
 					var np = normalPoint.instance()
-					np.global_position = worldPos + tilemap.cell_size/2
+					np.global_position = worldPos + self.cell_size/2
 					parent.addPoint(np)
-
-
-#func addPoint(pt):
-#	$Points.add_child(pt)
