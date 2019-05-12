@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 export var movementSpeed = 20
 onready var timer = $Timer
+onready var boostTimer = $BoostTimer
 enum States {NORMAL, CHASING_PLAYER, CHASING_GHOSTS, RUNNING_AWAY}
 var lastDirection = Vector2(-1,0)
 onready var map = self.get_tree().get_root().get_node("/root/Root/LevelPacman/TileMap")
@@ -21,6 +22,7 @@ func _init():
 func _ready():
 	changeState(States.NORMAL)
 	timer.connect("timeout", self, "_onTimer_timeout")
+	boostTimer.connect("timeout", self, "_onBoostTimer_timeout")
 
 func _process(delta):
 	if Input.is_key_pressed(KEY_J):
@@ -70,3 +72,7 @@ func moveTo(worldPosition):
 	
 func _onTimer_timeout():
 	ableToTeleport = true
+	
+func _onBoostTimer_timeout():
+	isBoosted = false
+	print('Boost for ', self.name, ' has ended.')

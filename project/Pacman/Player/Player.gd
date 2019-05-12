@@ -2,6 +2,7 @@ extends KinematicBody2D
 export var movementSpeed = 300.0
 
 onready var timer = $Timer
+onready var boostTimer = $BoostTimer
 
 var isBoosted = false
 var loaded = false
@@ -12,6 +13,7 @@ var ableToTeleport = true
 
 func _ready():
 	timer.connect("timeout", self, "_onTimer_timeout")
+	boostTimer.connect("timeout", self, "_onBoostTimer_timeout")
 
 func _process(delta):
 	direction = Vector2()
@@ -20,6 +22,7 @@ func _process(delta):
 	update()
 	if not ableToTeleport and timer.is_stopped():
 		timer.start()
+		
 
 func handleInput():
 	if Input.is_action_pressed("ui_left"):
@@ -39,3 +42,6 @@ func handleInput():
 		
 func _onTimer_timeout():
 	ableToTeleport = true
+	
+func _onBoostTimer_timeout():
+	isBoosted = false

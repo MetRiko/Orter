@@ -13,4 +13,7 @@ func _process(delta):
 		
 
 func _onPoint_pickup(object):
+	object.isBoosted = true
+	object.boostTimer.start()
+	print('Boost for ', object.name, ' has started.')
 	queue_free()

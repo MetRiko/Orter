@@ -25,3 +25,6 @@ shape = SubResource( 1 )
 wait_time = 2.0
 one_shot = true
 
+[node name="BoostTimer" type="Timer" parent="."]
+one_shot = true
+
