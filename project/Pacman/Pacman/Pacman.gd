@@ -75,4 +75,3 @@ func _onTimer_timeout():
 	
 func _onBoostTimer_timeout():
 	isBoosted = false
-	print('Boost for ', self.name, ' has ended.')
