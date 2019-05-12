@@ -2,7 +2,6 @@ extends Sprite
 
 signal pickup(object)
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	self.connect("pickup", self, "_onPoint_pickup")
 	

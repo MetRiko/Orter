@@ -7,6 +7,7 @@ var lastDirection = Vector2(-1,0)
 onready var map = self.get_tree().get_root().get_node("/root/Root/LevelPacman/TileMap")
 var currentState = States.NORMAL
 var ableToTeleport = true
+var isBoosted = false
 var astarPath = []
 const POINT_RADIUS = 3
 var targetPosition = Vector2()

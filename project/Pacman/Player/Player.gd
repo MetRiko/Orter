@@ -3,6 +3,7 @@ export var movementSpeed = 300.0
 
 onready var timer = $Timer
 
+var isBoosted = false
 var loaded = false
 var lastDirection = Vector2()
 var direction = Vector2()
