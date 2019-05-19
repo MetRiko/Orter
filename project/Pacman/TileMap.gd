@@ -10,6 +10,7 @@ extends TileMap
 #6 empty tiles, no nav
 #######################
 
+export var runFromPacmanDistance = 8
 onready var normalPoint = preload("res://Pacman/Scenes/Point.tscn")
 onready var portalScene = preload("res://Pacman/Portal.tscn")
 onready var parent = self.get_parent()
@@ -101,6 +102,22 @@ func getPathToRandomTile(start, mode):
 	while mode == 1 and tmp.y < threshold or (tmp.x == pathStartPosition.x and tmp.y == pathStartPosition.y):
 		tmp = astar.get_point_position(astar.get_points()[randi() % astar.get_points().size()])
 	while mode == 2 and tmp.y >= threshold or (tmp.x == pathStartPosition.x and tmp.y == pathStartPosition.y):
+		tmp = astar.get_point_position(astar.get_points()[randi() % astar.get_points().size()])
+	self.pathEndPosition = Vector2(tmp.x, tmp.y)
+	recalculatePath()
+	var pathWorld = []
+	for point in pointPath:
+		var pointWorld = map_to_world(Vector2(point.x,point.y)) + halfCellSize
+		pathWorld.append(pointWorld)
+	return pathWorld
+	
+func getPathToRunAwayFrom(start, runaway):
+	randomize()
+	self.pathStartPosition = world_to_map(start)
+	var threshold = mapOffset.y + mapSize.y / 2
+	var runEndpoint = world_to_map(runaway)
+	var tmp = astar.get_point_position(astar.get_points()[randi() % astar.get_points().size()])
+	while abs(tmp.x - runEndpoint.x) < runFromPacmanDistance and abs(tmp.y - runEndpoint.y) < runFromPacmanDistance:
 		tmp = astar.get_point_position(astar.get_points()[randi() % astar.get_points().size()])
 	self.pathEndPosition = Vector2(tmp.x, tmp.y)
 	recalculatePath()

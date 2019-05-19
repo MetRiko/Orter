@@ -12,6 +12,7 @@ var targetPosition = Vector2()
 var targetPointWorld = Vector2()
 var velocity = Vector2()
 onready var pacman = self.get_tree().get_root().get_node("/root/Root/LevelPacman/Pacman")
+onready var startingPos = global_position
 
 func _init():
 	pass
@@ -49,7 +50,15 @@ func changeState(newState):
 		if not astarPath or len (astarPath) == 1:
 			return
 		targetPointWorld = astarPath[0]
-
+	if newState == States.RUNNING_AWAY:
+		if pacman.isBoosted:
+			print('run')
+			astarPath = map.getPathToRunAwayFrom(global_position, pacman.global_position)
+			if not astarPath or len (astarPath) == 1:
+				return
+		else:
+			changeState(States.CHASING_PACMAN)
+			
 func moveTo(worldPosition):
 	var ARRIVE_DISTANCE = 0.2
 	var desiredVelocity = (worldPosition - global_position).normalized() * movementSpeed
