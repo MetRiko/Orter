@@ -110,6 +110,19 @@ func getPathToRandomTile(start, mode):
 		pathWorld.append(pointWorld)
 	return pathWorld
 	
+func getPathToRandomGhost(start):
+	randomize()
+	self.pathStartPosition = world_to_map(start)
+	var ghost = parent.get_node('Ghosts').get_children()[randi() % parent.get_node('Ghosts').get_child_count()]
+	var ghostMap = self.world_to_map(Vector2(ghost.position.x, ghost.position.y))
+	self.pathEndPosition = Vector2(ghostMap.x, ghostMap.y)
+	recalculatePath()
+	var pathWorld = []
+	for point in pointPath:
+		var pointWorld = map_to_world(Vector2(point.x,point.y)) + halfCellSize
+		pathWorld.append(pointWorld)
+	return pathWorld
+	
 func recalculatePath():
 	var startPointIndex = calculatePointIndex(pathStartPosition)
 	var endPointIndex = calculatePointIndex(pathEndPosition)

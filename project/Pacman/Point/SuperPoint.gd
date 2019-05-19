@@ -14,5 +14,7 @@ func _process(delta):
 
 func _onPoint_pickup(object):
 	object.isBoosted = true
+	if object.is_in_group("pacman"):
+		object.changeState(object.States.CHASING_GHOSTS)
 	object.boostTimer.start()
 	queue_free()

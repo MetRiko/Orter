@@ -60,6 +60,14 @@ func changeState(newState):
 		if not astarPath or len (astarPath) == 1:
 			return
 		targetPointWorld = astarPath[0]
+	if newState == States.CHASING_GHOSTS:
+		if isBoosted:
+			astarPath = map.getPathToRandomGhost(global_position)
+			if not astarPath or len(astarPath) == 1:
+				return
+			targetPointWorld = astarPath[0]
+		else:
+			changeState(States.NORMAL)
 	
 func moveTo(worldPosition):
 	var ARRIVE_DISTANCE = 0.2
@@ -75,3 +83,4 @@ func _onTimer_timeout():
 	
 func _onBoostTimer_timeout():
 	isBoosted = false
+	changeState(States.NORMAL)
