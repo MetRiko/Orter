@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Block.gd" type="Script" id=1]
+[ext_resource path="res://textures/placeholders/blocks/block-shape-2.png" type="Texture" id=2]
+
+[node name="Block" type="KinematicBody2D"]
+scale = Vector2( 3, 3 )
+collision/safe_margin = 0.001
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+centered = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( 0, 0, 0, 128, 192, 128, 192, 64, 64, 64, 64, 0 )
+
