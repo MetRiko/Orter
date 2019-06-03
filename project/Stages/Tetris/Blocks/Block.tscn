@@ -7,6 +7,7 @@
 blend_mode = 1
 
 [node name="Block" type="KinematicBody2D"]
+collision/safe_margin = 0.001
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true

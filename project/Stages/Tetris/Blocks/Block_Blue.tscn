@@ -4,6 +4,7 @@
 [ext_resource path="res://Stages/Tetris/Textures/blocks/block_shape_6_blue.png" type="Texture" id=2]
 
 [node name="Block_Blue" type="KinematicBody2D"]
+collision/safe_margin = 0.001
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
