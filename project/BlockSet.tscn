@@ -18,14 +18,14 @@ position = Vector2( 1536, -384 )
 position = Vector2( 1152, -8640 )
 
 [node name="Block5" parent="." instance=ExtResource( 1 )]
-position = Vector2( 2112, -3456 )
+position = Vector2( 1344, -3456 )
 
 [node name="Block6" parent="." instance=ExtResource( 1 )]
 position = Vector2( 960, -7104 )
 rotation = 1.5708
 
 [node name="Block8" parent="." instance=ExtResource( 1 )]
-position = Vector2( 2304, -9984 )
+position = Vector2( 1728, -9984 )
 rotation = 1.5708
 
 [node name="Block9" parent="." instance=ExtResource( 1 )]
@@ -37,11 +37,11 @@ position = Vector2( 1920, -16896 )
 rotation = 1.5708
 
 [node name="Block11" parent="." instance=ExtResource( 1 )]
-position = Vector2( 2112, -11328 )
+position = Vector2( 1152, -11328 )
 rotation = 1.5708
 
 [node name="Block12" parent="." instance=ExtResource( 1 )]
-position = Vector2( 2112, -19584 )
+position = Vector2( 1363.2, -19584 )
 rotation = 3.14159
 
 [node name="Block13" parent="." instance=ExtResource( 1 )]
@@ -61,15 +61,15 @@ position = Vector2( 1536, -18048 )
 rotation = 3.14159
 
 [node name="Block17" parent="." instance=ExtResource( 1 )]
-position = Vector2( 2688, -15360 )
+position = Vector2( 1171.2, -15552 )
 rotation = 3.14159
 
 [node name="Block18" parent="." instance=ExtResource( 1 )]
-position = Vector2( 2688, -4992 )
+position = Vector2( 1728, -4992 )
 rotation = 3.14159
 
 [node name="Block19" parent="." instance=ExtResource( 1 )]
-position = Vector2( 2304, -21120 )
+position = Vector2( 1171.2, -21120 )
 rotation = 3.14159
 
 [node name="Block7" parent="." instance=ExtResource( 1 )]
