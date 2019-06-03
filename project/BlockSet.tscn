@@ -1,34 +1,72 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Block.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Block_Green.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Stages/Tetris/Blocks/Block_Green.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Stages/Tetris/Blocks/Block_Yellow.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Stages/Tetris/Blocks/Block_Purple.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Stages/Tetris/Blocks/Block_Orange.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Stages/Tetris/Blocks/Block_Blue.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Stages/Tetris/Blocks/Block.tscn" type="PackedScene" id=6]
 
 [node name="BlockSet" type="Node2D"]
 position = Vector2( 0, 9792 )
 
-[node name="Block" parent="." instance=ExtResource( 1 )]
-position = Vector2( 192, 2496 )
+[node name="Block_Green" parent="." instance=ExtResource( 1 )]
+position = Vector2( 384, 384 )
 
-[node name="Block2" parent="." instance=ExtResource( 1 )]
-position = Vector2( 403.2, -1920 )
-rotation = 1.5708
+[node name="Block_Green2" parent="." instance=ExtResource( 1 )]
+position = Vector2( -384, 0 )
 
-[node name="Block4" parent="." instance=ExtResource( 1 )]
-position = Vector2( 1536, -8832 )
-rotation = 1.5708
+[node name="Block_Green3" parent="." instance=ExtResource( 1 )]
+position = Vector2( 768, -1152 )
 
-[node name="Block3" parent="." instance=ExtResource( 1 )]
-position = Vector2( -192, -5184 )
-rotation = -1.5708
+[node name="Block_Green4" parent="." instance=ExtResource( 1 )]
+position = Vector2( -960, -2304 )
 
-[node name="Block_Green" parent="." instance=ExtResource( 2 )]
-position = Vector2( 576, 384 )
+[node name="Block_Yellow" parent="." instance=ExtResource( 2 )]
+position = Vector2( 384, 1344 )
 
-[node name="Block_Green2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 960, -3456 )
-rotation = -1.5708
+[node name="Block_Yellow2" parent="." instance=ExtResource( 2 )]
+position = Vector2( -1132.8, -3456 )
 
-[node name="Block_Green3" parent="." instance=ExtResource( 2 )]
-position = Vector2( 0, -7680 )
-rotation = 1.5708
+[node name="Block_Yellow3" parent="." instance=ExtResource( 2 )]
+position = Vector2( 0, -5568 )
+
+[node name="Block_Purple" parent="." instance=ExtResource( 3 )]
+position = Vector2( -768, -960 )
+
+[node name="Block_Purple2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 768, -2112 )
+
+[node name="Block_Orange" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1152, 1152 )
+
+[node name="Block_Orange2" parent="." instance=ExtResource( 4 )]
+position = Vector2( -576, -3840 )
+
+[node name="Block_Blue" parent="." instance=ExtResource( 5 )]
+position = Vector2( -1152, -1536 )
+
+[node name="Block_Blue4" parent="." instance=ExtResource( 5 )]
+position = Vector2( -1152, 1728 )
+
+[node name="Block_Blue5" parent="." instance=ExtResource( 5 )]
+position = Vector2( 1344, 0 )
+
+[node name="Block_Blue2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 1344, -3072 )
+
+[node name="Block_Blue3" parent="." instance=ExtResource( 5 )]
+position = Vector2( 780.8, -4800 )
+
+[node name="Block" parent="." instance=ExtResource( 6 )]
+position = Vector2( 0, 2112 )
+
+[node name="Block2" parent="." instance=ExtResource( 6 )]
+position = Vector2( -576, 576 )
+
+[node name="Block3" parent="." instance=ExtResource( 6 )]
+position = Vector2( 6.10352e-005, -1728 )
+
+[node name="Block4" parent="." instance=ExtResource( 6 )]
+position = Vector2( 6.10352e-005, -3072 )
 

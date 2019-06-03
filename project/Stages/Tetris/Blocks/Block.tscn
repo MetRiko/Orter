@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Stages/Tetris/Blocks/Block.gd" type="Script" id=1]
+[ext_resource path="res://Stages/Tetris/Textures/blocks/block_shape_2_red.png" type="Texture" id=2]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+blend_mode = 1
+
+[node name="Block" type="KinematicBody2D"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 1 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 2 )
+centered = false
+region_rect = Rect2( 0, 0, 192, 128 )
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2( 96, 128 )
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PoolVector2Array( -32, -160, -32, 288, 32, 288, 32, 192, 160, 192, 160, 288, 224, 288, 224, 192, 352, 192, 352, 288, 416, 288, 416, 32, 352, 32, 352, 128, 224, 128, 224, 32, 160, 32, 160, 128, 32, 128, 32, -160 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( 0, 0, 0, 384, 576, 384, 576, 192, 192, 192, 192, 0 )
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]

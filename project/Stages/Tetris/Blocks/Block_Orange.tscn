@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Stages/Tetris/Blocks/Block_Orange.gd" type="Script" id=1]
+[ext_resource path="res://Stages/Tetris/Textures/blocks/block_shape_5_orange.png" type="Texture" id=2]
+
+[node name="Block_Orange" type="KinematicBody2D"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 3, 3 )
+texture = ExtResource( 2 )
+centered = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( 0, 0, 0, 384, 384, 384, 384, 0 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PoolVector2Array( 64, -32, 64, 416, 128, 416, 128, 224, 256, 224, 256, 416, 320, 416, 320, -32, 256, -32, 256, 160, 128, 160, 128, -32 )
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]

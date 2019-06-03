@@ -1,50 +1,47 @@
 extends KinematicBody2D
 
-signal hit
+const UP = Vector2(0, -1)
+const GRAVITY = 60
+const SPEED_GAIN = 100
+const MAX_SPEED = 1400
+const JUMP_HEIGHT = -1800
 
-var sBullet = preload("res://weapon/Bullet.tscn")
+var motion = Vector2()
 
-var vel = Vector2()
-
-func _process(delta):
-	vel = Vector2()
-	if Input.is_action_pressed("ui_left"):
-		vel.x = -1.0
-	if Input.is_action_pressed("ui_right"):
-		vel.x = 1.0
-	if Input.is_action_pressed("ui_up"):
-		vel.y = -1.0
-	if Input.is_action_pressed("ui_down"):
-		vel.y = 1.0
-		
-	move_and_slide(vel.normalized()*200.0)
-	
-	#ready
-	#init
-	#enter_tree
-
-func _input(event):
-	if event.is_action_pressed("shoot"):
-		shoot()
-
-func shoot():
-	
-	var bullet = sBullet.instance()
-	Game.getCurrentStage().addProjectile(bullet)
-	bullet.global_position = global_position
-	
-	var vec = get_global_mouse_position() - global_position
-	vec = vec.normalized() * 10.0	
-	bullet.setVelocity(vec)
+onready var Block = preload("res://BlockSet.tscn")
 
 func _ready():
-	$Timer.connect("timeout", self, "_onTimer_timeout")
-
-func _onTimer_timeout():
-	rotate(30)
+	yield(get_tree(), "idle_frame")
+	get_tree().call_group("blocks","set_player", self)
 
 func _physics_process(delta):
-	var collision = move_and_collide(vel.normalized())
-	if collision:
-		hide()
-		$CollisionShape2D.disabled = true;
+	
+	motion.y += GRAVITY
+	
+	if Input.is_action_pressed("ui_right"):
+		if (motion.x<MAX_SPEED && motion.x>-MAX_SPEED):
+			motion.x += SPEED_GAIN
+	elif Input.is_action_pressed("ui_left"):
+		if (motion.x<MAX_SPEED && motion.x>-MAX_SPEED):
+			motion.x += -SPEED_GAIN
+	else:
+		motion.x = 0
+	
+	if Input.is_action_just_released("ui_right"):
+		motion.x = 0
+	
+	if Input.is_action_just_released("ui_left"):
+		motion.x = 0
+	
+	if Input.is_action_just_released("ui_r"):
+		get_tree().reload_current_scene()
+	
+	if is_on_floor():
+		
+		if Input.is_action_pressed("ui_up"):	#skok
+			get_node("Jump_Sound").play()
+			motion.y = JUMP_HEIGHT
+	
+	motion = move_and_slide(motion, UP)#ruch wraz ze skokiem i zerowaniem prędkości
+	
+	pass
