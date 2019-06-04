@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/death_anim(3).png-09d638e77af8bfa5451e5e4735c41ce5.stex"
+path="res://.import/death_anim(1).png-192adce68b39b4ee6ed3a23a13a7de2e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://death_anim(3).png"
-dest_files=[ "res://.import/death_anim(3).png-09d638e77af8bfa5451e5e4735c41ce5.stex" ]
+source_file="res://Stages/Tetris/Textures/death_anim/death_anim(1).png"
+dest_files=[ "res://.import/death_anim(1).png-192adce68b39b4ee6ed3a23a13a7de2e.stex" ]
 
 [params]
 

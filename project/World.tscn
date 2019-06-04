@@ -3,12 +3,12 @@
 [ext_resource path="res://World.gd" type="Script" id=1]
 [ext_resource path="res://Stages/Tetris/BackgroundTile.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Player/Player.gd" type="Script" id=3]
-[ext_resource path="res://death_anim(1).png" type="Texture" id=4]
-[ext_resource path="res://death_anim(2).png" type="Texture" id=5]
-[ext_resource path="res://death_anim(3).png" type="Texture" id=6]
-[ext_resource path="res://death_anim(4).png" type="Texture" id=7]
-[ext_resource path="res://death_anim(5).png" type="Texture" id=8]
-[ext_resource path="res://death_anim(6).png" type="Texture" id=9]
+[ext_resource path="res://Stages/Tetris/Textures/death_anim/death_anim(1).png" type="Texture" id=4]
+[ext_resource path="res://Stages/Tetris/Textures/death_anim/death_anim(2).png" type="Texture" id=5]
+[ext_resource path="res://Stages/Tetris/Textures/death_anim/death_anim(3).png" type="Texture" id=6]
+[ext_resource path="res://Stages/Tetris/Textures/death_anim/death_anim(4).png" type="Texture" id=7]
+[ext_resource path="res://Stages/Tetris/Textures/death_anim/death_anim(5).png" type="Texture" id=8]
+[ext_resource path="res://Stages/Tetris/Textures/death_anim/death_anim(6).png" type="Texture" id=9]
 [ext_resource path="res://AnimatedSprite.gd" type="Script" id=10]
 [ext_resource path="res://Stages/Tetris/Textures/player.png" type="Texture" id=11]
 [ext_resource path="res://audio/jump.wav" type="AudioStream" id=12]
@@ -17,7 +17,7 @@
 [ext_resource path="res://audio/block_sound.ogg" type="AudioStream" id=15]
 [ext_resource path="res://Stages/Tetris/TileMap.tscn" type="PackedScene" id=16]
 
-[sub_resource type="SpriteFrames" id=7]
+[sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ],
 "loop": false,
@@ -25,10 +25,10 @@ animations = [ {
 "speed": 14.0
 } ]
 
-[sub_resource type="CanvasItemMaterial" id=1]
+[sub_resource type="CanvasItemMaterial" id=2]
 blend_mode = 1
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 32, 31.2036 )
 
 [sub_resource type="RectangleShape2D" id=4]
@@ -58,19 +58,19 @@ script = ExtResource( 3 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Player"]
 visible = false
 scale = Vector2( 2, 2 )
-frames = SubResource( 7 )
+frames = SubResource( 1 )
 animation = "death"
 script = ExtResource( 10 )
 
 [node name="Sprite" type="Sprite" parent="Player"]
-material = SubResource( 1 )
+material = SubResource( 2 )
 position = Vector2( -2.57492e-005, 0 )
 scale = Vector2( 0.999999, 1 )
 texture = ExtResource( 11 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 position = Vector2( 0, 1.104 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="Jump_Sound" type="AudioStreamPlayer" parent="Player"]
 stream = ExtResource( 12 )
@@ -122,6 +122,25 @@ margin_bottom = -3410.0
 custom_fonts/font = SubResource( 6 )
 text = "Press 'R' to restart"
 align = 1
+valign = 1
+uppercase = true
+
+[node name="Label2" type="Label" parent="."]
+margin_left = 5248.0
+margin_top = -4160.0
+margin_right = 8715.0
+margin_bottom = -3251.0
+custom_fonts/font = SubResource( 6 )
+text = "Todo:
+1) Stop blocks after death
+2) Stage completion condition
+3) Setting blocks
+4) Second stage with blocks falling faster?
+
+Additional features:
+- 10% chance of green block moving sideways
+- animated player death (sprite not perfect)
+"
 valign = 1
 uppercase = true
 
