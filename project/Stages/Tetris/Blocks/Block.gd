@@ -1,15 +1,12 @@
 extends KinematicBody2D
 
-const MOVEMENT = 192
+var MOVEMENT = 192
 
 var motion = Vector2()
 
 var time = 0
 var timeMult = 1.0
 var timePaused = false
-
-func _ready():
-	add_to_group("blocks")
 
 func _physics_process(delta):
 	

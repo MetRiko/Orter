@@ -9,6 +9,9 @@ const JUMP_HEIGHT = -1800
 var motion = Vector2()
 
 onready var Block = preload("res://BlockSet.tscn")
+onready var BlockSet = get_tree().get_root().get_node("World").get_node("BlockSet")
+onready var raycast = $RayCast2D
+onready var raycast_down = $RayCast2D2
 
 func _ready():
 	yield(get_tree(), "idle_frame")
@@ -33,8 +36,11 @@ func _physics_process(delta):
 	if Input.is_action_just_released("ui_left"):
 		motion.x = 0
 	
-	if Input.is_action_just_released("ui_r"):
-		get_tree().reload_current_scene()
+	if raycast.is_colliding() and raycast_down.is_colliding():
+		raycast.enabled = false
+		raycast_down.enabled = false
+		BlockSet.get_node("Block_Sound").queue_free()
+		_kill()
 	
 	if is_on_floor():
 		
@@ -43,5 +49,9 @@ func _physics_process(delta):
 			motion.y = JUMP_HEIGHT
 	
 	motion = move_and_slide(motion, UP)#ruch wraz ze skokiem i zerowaniem prędkości
-	
-	pass
+
+func _kill():
+	$Sprite.hide()
+	$AnimatedSprite.show()
+	get_node("Death_Sound").play()
+	$AnimatedSprite.playing = true

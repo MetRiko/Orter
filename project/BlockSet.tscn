@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Stages/Tetris/Blocks/Block_Green.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Stages/Tetris/Blocks/Block_Yellow.tscn" type="PackedScene" id=2]
@@ -7,8 +7,17 @@
 [ext_resource path="res://Stages/Tetris/Blocks/Block_Blue.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Stages/Tetris/Blocks/Block.tscn" type="PackedScene" id=6]
 
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+
+var MOVEMENT = 192
+ 
+func _set_grav():
+	get_children().back().MOVEMENT = 0"
+
 [node name="BlockSet" type="Node2D"]
 position = Vector2( 0, 9792 )
+script = SubResource( 1 )
 
 [node name="Block_Green" parent="." instance=ExtResource( 1 )]
 position = Vector2( 384, 384 )
