@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Stages/Tetris/Blocks/Block_Green.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Stages/Tetris/Blocks/Block_Yellow.tscn" type="PackedScene" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://Stages/Tetris/Blocks/Block_Orange.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Stages/Tetris/Blocks/Block_Blue.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Stages/Tetris/Blocks/Block.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Stages/Tetris/Exit.tscn" type="PackedScene" id=7]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
@@ -17,7 +16,7 @@ func _set_grav():
 	get_children().back().MOVEMENT = 0"
 
 [node name="BlockSet" type="Node2D"]
-position = Vector2( 0, 9792 )
+position = Vector2( 0, 10944 )
 script = SubResource( 1 )
 
 [node name="Block_Green" parent="." instance=ExtResource( 1 )]
@@ -27,43 +26,52 @@ position = Vector2( 384, 384 )
 position = Vector2( -384, 0 )
 
 [node name="Block_Green6" parent="." instance=ExtResource( 1 )]
-position = Vector2( -391.732, -8170.92 )
+position = Vector2( -384, -8256 )
 
 [node name="Block_Green9" parent="." instance=ExtResource( 1 )]
-position = Vector2( -776.675, -5000 )
+position = Vector2( 6.10352e-005, -6528 )
 
 [node name="Block_Green3" parent="." instance=ExtResource( 1 )]
 position = Vector2( 768, -1152 )
 
 [node name="Block_Green7" parent="." instance=ExtResource( 1 )]
-position = Vector2( 760.268, -9322.92 )
+position = Vector2( 768, -9408 )
 
 [node name="Block_Green4" parent="." instance=ExtResource( 1 )]
 position = Vector2( -960, -2304 )
 
 [node name="Block_Green8" parent="." instance=ExtResource( 1 )]
-position = Vector2( -967.732, -10474.9 )
+position = Vector2( -768, -10560 )
 
 [node name="Block_Yellow" parent="." instance=ExtResource( 2 )]
 position = Vector2( 384, 1344 )
 
+[node name="Block_Yellow6" parent="." instance=ExtResource( 2 )]
+position = Vector2( 1536, -768 )
+
 [node name="Block_Yellow4" parent="." instance=ExtResource( 2 )]
-position = Vector2( 376.268, -6826.92 )
+position = Vector2( 576, -8064 )
 
 [node name="Block_Yellow5" parent="." instance=ExtResource( 2 )]
-position = Vector2( -583.469, -7000 )
+position = Vector2( -576, -7104 )
+
+[node name="Block_Yellow7" parent="." instance=ExtResource( 2 )]
+position = Vector2( -384, -12672 )
 
 [node name="Block_Yellow2" parent="." instance=ExtResource( 2 )]
-position = Vector2( -1132.8, -3456 )
+position = Vector2( -1145.6, -3456 )
 
 [node name="Block_Yellow3" parent="." instance=ExtResource( 2 )]
-position = Vector2( 0, -5568 )
+position = Vector2( -192, -5568 )
 
 [node name="Block_Purple" parent="." instance=ExtResource( 3 )]
 position = Vector2( -768, -960 )
 
 [node name="Block_Purple3" parent="." instance=ExtResource( 3 )]
-position = Vector2( -775.732, -9130.92 )
+position = Vector2( -768, -9216 )
+
+[node name="Block_Purple4" parent="." instance=ExtResource( 3 )]
+position = Vector2( -384, -14208 )
 
 [node name="Block_Purple2" parent="." instance=ExtResource( 3 )]
 position = Vector2( 768, -2112 )
@@ -71,11 +79,17 @@ position = Vector2( 768, -2112 )
 [node name="Block_Orange" parent="." instance=ExtResource( 4 )]
 position = Vector2( 1152, 1152 )
 
+[node name="Block_Orange13" parent="." instance=ExtResource( 4 )]
+position = Vector2( 384, -13056 )
+
 [node name="Block_Orange4" parent="." instance=ExtResource( 4 )]
-position = Vector2( 1144.27, -7018.92 )
+position = Vector2( 1152, -7104 )
 
 [node name="Block_Orange2" parent="." instance=ExtResource( 4 )]
 position = Vector2( -576, -3840 )
+
+[node name="Block_Orange3" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1536, -4800 )
 
 [node name="Block_Blue" parent="." instance=ExtResource( 5 )]
 position = Vector2( -1152, -1536 )
@@ -84,19 +98,25 @@ position = Vector2( -1152, -1536 )
 position = Vector2( -1152, 1728 )
 
 [node name="Block_Blue10" parent="." instance=ExtResource( 5 )]
-position = Vector2( -1159.73, -6442.92 )
+position = Vector2( -1152, -6336 )
 
 [node name="Block_Blue5" parent="." instance=ExtResource( 5 )]
 position = Vector2( 1344, 0 )
 
 [node name="Block_Blue9" parent="." instance=ExtResource( 5 )]
-position = Vector2( 1336.27, -8170.92 )
+position = Vector2( 1344, -8448 )
+
+[node name="Block_Blue11" parent="." instance=ExtResource( 5 )]
+position = Vector2( -960, -12480 )
 
 [node name="Block_Blue2" parent="." instance=ExtResource( 5 )]
 position = Vector2( 1344, -3072 )
 
 [node name="Block_Blue3" parent="." instance=ExtResource( 5 )]
-position = Vector2( 765, -4800 )
+position = Vector2( 768, -4800 )
+
+[node name="Block_Blue6" parent="." instance=ExtResource( 5 )]
+position = Vector2( 1728, -7680 )
 
 [node name="Block" parent="." instance=ExtResource( 6 )]
 position = Vector2( 0, 2112 )
@@ -108,14 +128,11 @@ position = Vector2( -576, 576 )
 position = Vector2( 6.10352e-005, -1728 )
 
 [node name="Block8" parent="." instance=ExtResource( 6 )]
-position = Vector2( 1.58545, -9908.24 )
+position = Vector2( -192, -9984 )
 
 [node name="Block4" parent="." instance=ExtResource( 6 )]
-position = Vector2( 6.10352e-005, -3072 )
+position = Vector2( 192, -3072 )
 
 [node name="Block7" parent="." instance=ExtResource( 6 )]
-position = Vector2( 6.24463, -11233.6 )
-
-[node name="Exit_block" parent="." instance=ExtResource( 7 )]
-position = Vector2( -107.137, -12419.6 )
+position = Vector2( 192, -11520 )
 

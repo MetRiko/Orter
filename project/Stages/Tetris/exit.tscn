@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Stages/Tetris/Exit.gd" type="Script" id=1]
 [ext_resource path="res://Stages/Tetris/Textures/exit.png" type="Texture" id=2]
@@ -6,13 +6,11 @@
 [sub_resource type="CanvasItemMaterial" id=1]
 blend_mode = 1
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 191.298, 193.313 )
-
-[node name="Block" type="KinematicBody2D"]
-position = Vector2( 3.25354, 0 )
-collision/safe_margin = 0.001
+[node name="Node2D" type="Node2D"]
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 1 )
@@ -21,7 +19,8 @@ texture = ExtResource( 2 )
 centered = false
 region_rect = Rect2( 0, 0, 192, 128 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 192.923, 190.778 )
-shape = SubResource( 2 )
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2( 192, 192 )
+enabled = true
+cast_to = Vector2( 0, 192 )
 
