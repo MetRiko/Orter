@@ -41,6 +41,9 @@ func _ready():
 	setHealth(1)
 	
 	get_tree().create_timer(rand_range(2.0, 4.0)).connect("timeout", $CooldownTimer, "start")
+	
+	$Anim.play("Idle", -1, rand_range(0.8, 1.2))
+	$Anim.seek(rand_range(0.0, 1.0), true)
 
 func setHealth(value):
 	health = value

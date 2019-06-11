@@ -1,11 +1,27 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Enemies/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://Enemies/enemy.png" type="Texture" id=2]
 [ext_resource path="res://Enemies/Portal.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 26.8829
+radius = 31.0708
+
+[sub_resource type="Animation" id=2]
+resource_name = "Idle"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
 
 [node name="Enemy" type="KinematicBody2D" groups=[
 "Enemy",
@@ -15,16 +31,21 @@ collision_mask = 0
 script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 5 )
+position = Vector2( 0, -1 )
 rotation = 1.5708
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 3, 3 )
+position = Vector2( 2.74825, 1.6993 )
+scale = Vector2( 6, 6 )
 texture = ExtResource( 2 )
+hframes = 2
 
 [node name="CooldownTimer" type="Timer" parent="."]
 wait_time = 0.5
 
 [node name="Portal" parent="." instance=ExtResource( 3 )]
+
+[node name="Anim" type="AnimationPlayer" parent="."]
+anims/Idle = SubResource( 2 )
 
