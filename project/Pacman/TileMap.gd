@@ -1,5 +1,8 @@
 extends TileMap
 
+signal pickupPoint
+signal pickupSuperPoint
+
 #######################
 #tiles ids
 #0 wall
@@ -11,7 +14,7 @@ extends TileMap
 #######################
 
 export var runFromPacmanDistance = 8
-onready var normalPoint = preload("res://Pacman/Scenes/Point.tscn")
+onready var normalPoint = preload("res://Pacman/Point/Point.tscn")
 onready var portalScene = preload("res://Pacman/Portal.tscn")
 onready var parent = self.get_parent()
 onready var superPoint = preload("res://Pacman/Point/SuperPoint.tscn")
@@ -143,7 +146,7 @@ func getPathToRandomGhost(start):
 func recalculatePath():
 	var startPointIndex = calculatePointIndex(pathStartPosition)
 	var endPointIndex = calculatePointIndex(pathEndPosition)
-	if pointToDisconnect != null:
+	if pointToDisconnect != null and astar.has_point(pointToDisconnect):
 		astar.set_point_weight_scale(pointToDisconnect, 9999.0)
 		pointPath = astar.get_point_path(startPointIndex, endPointIndex)
 		astar.set_point_weight_scale(pointToDisconnect, 1.0)
@@ -185,8 +188,15 @@ func initTiles():
 				var sp = superPoint.instance()
 				sp.global_position = worldPos + self.cell_size/2
 				parent.addPoint(sp)
+				sp.connect("pickup", self, "onSuperPickup")
 			if self.get_cell(x,y) == -1:
 				var np = normalPoint.instance()
 				np.global_position = worldPos + self.cell_size/2
 				parent.addPoint(np)
-			
+				np.connect("pickup", self, "onPickup")
+
+func onPickup(object):
+	emit_signal("pickupPoint", object)
+	
+func onSuperPickup(object):
+	emit_signal("pickupSuperPoint", object)

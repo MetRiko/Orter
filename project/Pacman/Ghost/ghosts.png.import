@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/dino2.png-9d39eeacff6cf0a4c46c93bf57a86e7e.stex"
+path="res://.import/ghosts.png-7fee78984faa5efb6b13d12962393479.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://dino2.png"
-dest_files=[ "res://.import/dino2.png-9d39eeacff6cf0a4c46c93bf57a86e7e.stex" ]
+source_file="res://Pacman/Ghost/ghosts.png"
+dest_files=[ "res://.import/ghosts.png-7fee78984faa5efb6b13d12962393479.stex" ]
 
 [params]
 

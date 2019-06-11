@@ -1,5 +1,8 @@
 extends KinematicBody2D
 
+signal playerCollision
+signal ghostCollision
+
 export var movementSpeed = 20
 onready var timer = $Timer
 onready var boostTimer = $BoostTimer
@@ -14,7 +17,6 @@ const POINT_RADIUS = 3
 var targetPosition = Vector2()
 var targetPointWorld = Vector2()
 var velocity = Vector2()
-
 
 func _init():
 	pass
@@ -70,13 +72,23 @@ func changeState(newState):
 			changeState(States.NORMAL)
 	
 func moveTo(worldPosition):
-	var ARRIVE_DISTANCE = 0.2
+	var ARRIVE_DISTANCE = 2.0
 	var desiredVelocity = (worldPosition - global_position).normalized() * movementSpeed
 	var steering = desiredVelocity - velocity
 	velocity += steering
 	lastDirection =  velocity.normalized()
-	global_position += velocity * get_process_delta_time()
+	var result = move_and_collide(velocity * get_process_delta_time())
+	
+	if result and result.collider.is_in_group("Player"):
+		emit_signal("playerCollision")
+	elif result and result.collider.is_in_group("Ghost"):
+		emit_signal("ghostCollision", result.collider)
+
+	var angle = velocity.angle()
+	rotation = angle
+
 	return global_position.distance_to(worldPosition) < ARRIVE_DISTANCE
+
 	
 func _onTimer_timeout():
 	ableToTeleport = true

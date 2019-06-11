@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/dino1.png-da93bbf5b759fb8f615af6805d38d3d8.stex"
+path="res://.import/hud.png-3df6732995eec73d4a564fae5919d68c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://dino1.png"
-dest_files=[ "res://.import/dino1.png-da93bbf5b759fb8f615af6805d38d3d8.stex" ]
+source_file="res://Pacman/Hud/hud.png"
+dest_files=[ "res://.import/hud.png-3df6732995eec73d4a564fae5919d68c.stex" ]
 
 [params]
 

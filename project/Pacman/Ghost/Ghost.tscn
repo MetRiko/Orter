@@ -1,27 +1,48 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Pacman/Ghost/Ghost.gd" type="Script" id=1]
-[ext_resource path="res://Pacman/point_placeholder.png" type="Texture" id=2]
+[ext_resource path="res://Pacman/Ghost/ghosts.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 2.70536, 2.67804 )
+extents = Vector2( 4.9953, 4.99115 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "Run"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 4 ]
+}
 
 [node name="Ghost" type="KinematicBody2D" groups=[
+"Ghost",
 "ghosts",
 ]]
 collision_layer = 16
-collision_mask = 15
+collision_mask = 7
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
-hframes = 4
-frame = 3
+vframes = 6
+frame = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 5.0
 one_shot = true
+
+[node name="Anim" type="AnimationPlayer" parent="."]
+anims/Run = SubResource( 2 )
 
