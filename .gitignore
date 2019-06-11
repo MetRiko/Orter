@@ -1,1 +1,7 @@
-project/.import
+*.import
+*.pck
+*.zip
+*.apk
+*.exe
+*.cfg
+*.keystore

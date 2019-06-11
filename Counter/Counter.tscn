@@ -1,0 +1,69 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Counter/Counter.gd" type="Script" id=1]
+[ext_resource path="res://Counter/numbers.png" type="Texture" id=2]
+
+[node name="Counter" type="Node2D"]
+script = ExtResource( 1 )
+value = 10
+
+[node name="Nums" type="Node2D" parent="."]
+
+[node name="Pos_1" type="Sprite" parent="Nums"]
+position = Vector2( 48, 0 )
+texture = ExtResource( 2 )
+hframes = 10
+
+[node name="Pos_2" type="Sprite" parent="Nums"]
+position = Vector2( 36, 0 )
+texture = ExtResource( 2 )
+hframes = 10
+frame = 1
+
+[node name="Pos_3" type="Sprite" parent="Nums"]
+visible = false
+position = Vector2( 24, 0 )
+texture = ExtResource( 2 )
+hframes = 10
+frame = 1
+
+[node name="Pos_4" type="Sprite" parent="Nums"]
+visible = false
+position = Vector2( 12.1748, 0 )
+texture = ExtResource( 2 )
+hframes = 10
+frame = 2
+
+[node name="Pos_5" type="Sprite" parent="Nums"]
+visible = false
+position = Vector2( 0.174828, 0 )
+texture = ExtResource( 2 )
+hframes = 10
+frame = 5
+
+[node name="Pos_6" type="Sprite" parent="Nums"]
+visible = false
+position = Vector2( -11.8252, 0 )
+texture = ExtResource( 2 )
+hframes = 10
+frame = 4
+
+[node name="Pos_7" type="Sprite" parent="Nums"]
+visible = false
+position = Vector2( -23.8252, 0 )
+texture = ExtResource( 2 )
+hframes = 10
+
+[node name="Pos_8" type="Sprite" parent="Nums"]
+visible = false
+position = Vector2( -35.8252, 0 )
+texture = ExtResource( 2 )
+hframes = 10
+
+[node name="Pos_9" type="Sprite" parent="Nums"]
+visible = false
+position = Vector2( -47.8252, 0 )
+texture = ExtResource( 2 )
+hframes = 10
+frame = 1
+
